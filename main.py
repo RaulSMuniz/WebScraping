@@ -37,22 +37,25 @@ dataframe = pd.DataFrame({'Data de conversão de Euro': date, 'Moedas': currency
 
 option = 0
 
-
 while True:
-    option = int(input("Escolha uma opção: \n"
-    "1. Ver as taxas de câmbio em Euro \n"
-    "2. Escolher um valor em EUR e converter para a moeda escolhida \n"
-    "3. Mostra o arquivo XML original formatado \n"
-    "4. Exportar as taxas de câmbio para CSV \n"
-    "5. Fechar o menu \n\n"))
+    try:
+        option = int(input("Escolha uma opção: \n"
+        "1. Ver as taxas de câmbio em Euro \n"
+        "2. Escolher um valor em EUR e converter para a moeda escolhida \n"
+        "3. Mostra o arquivo XML original formatado \n"
+        "4. Exportar as taxas de câmbio para CSV \n"
+        "5. Fechar o menu \n"))
+    except ValueError:
+        print("Escolha um número inteiro entre 1 e 5. \n")
+        continue
 
     if option == 1:
         # Mostra o DataFrame
         print(dataframe, end="\n\n")
     elif option == 2:
         # Conversor de EURO para moeda escolhida
-        chosen_value = float(input("Digite o valor em EUR a ser convertido: \n\n"))
-        chosen_tax = input("Escolha a taxa de câmbio que será convertida (ex: USD, EUR): \n\n").upper()
+        chosen_value = float(input("Digite o valor em EUR a ser convertido: \n"))
+        chosen_tax = input("Escolha a taxa de câmbio que será convertida (ex: USD, EUR): \n").upper()
 
         # Verifica se a moeda escolhida está entre as opções
         if chosen_tax in currency:
