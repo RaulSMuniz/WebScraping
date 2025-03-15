@@ -34,10 +34,62 @@ if brl_rate:
 
 # Cria o DataFrame
 dataframe = pd.DataFrame({'Data de conversão de Euro': date, 'Moedas': currency, 'Taxa (Euro)': rate, 'Convertido para BRL': rate_to_brl})
-print(dataframe)
 
-# XML formatado:
-print(soup.prettify())
+option = 0
 
-# Exportar para CSV
-dataframe.to_csv(f"euro_conversion_{date}.csv", index=False, sep=';')
+
+while True:
+    option = int(input("Escolha uma opção: \n"
+    "1. Ver as taxas de câmbio em Euro \n"
+    "2. Escolher um valor em EUR e converter para a moeda escolhida \n"
+    "3. Mostra o arquivo XML original formatado \n"
+    "4. Exportar as taxas de câmbio para CSV \n"
+    "5. Fechar o menu \n"
+    ""))
+
+    if option == 1:
+        # Mostra o DataFrame
+        print(dataframe, "\n"
+        "")
+    elif option == 2:
+        # Conversor de EURO para moeda escolhida
+        chosen_value = float(input("Digite o valor em EUR a ser convertido: \n"
+        ""))
+        chosen_tax = input("Escolha a taxa de câmbio que será convertida (ex: USD, EUR): \n"
+        "").upper()
+
+        # Verifica se a moeda escolhida está entre as opções
+        if chosen_tax in currency:
+            index = currency.index(chosen_tax)
+            tax_rate = float(rate[index])
+            converted_value = round(chosen_value * tax_rate, 2)
+
+            print(f"{chosen_value} EUR equivale a {converted_value} {chosen_tax}", "\n"
+            "")
+        else: 
+            print("Moeda não encontrada. Verifique as taxas de câmbio disponíveis e tente novamente.\n"
+            "")
+    elif option == 3:
+        # XML formatado:
+        print(soup.prettify(), "\n"
+        "")
+    elif option == 4:
+        # Exporta o DataFrame para CSV
+        dataframe.to_csv(f"euro_conversion_{date}.csv", index=False, sep=';')
+        print("Exportado com sucesso.\n"
+        "")
+    elif option == 5:
+        break
+    elif option < 0 or option > 5:
+        print("Escolha uma opção válida. \n"
+        "")
+
+
+
+
+
+
+
+
+
+
