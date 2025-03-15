@@ -44,19 +44,15 @@ while True:
     "2. Escolher um valor em EUR e converter para a moeda escolhida \n"
     "3. Mostra o arquivo XML original formatado \n"
     "4. Exportar as taxas de câmbio para CSV \n"
-    "5. Fechar o menu \n"
-    ""))
+    "5. Fechar o menu \n\n"))
 
     if option == 1:
         # Mostra o DataFrame
-        print(dataframe, "\n"
-        "")
+        print(dataframe, end="\n\n")
     elif option == 2:
         # Conversor de EURO para moeda escolhida
-        chosen_value = float(input("Digite o valor em EUR a ser convertido: \n"
-        ""))
-        chosen_tax = input("Escolha a taxa de câmbio que será convertida (ex: USD, EUR): \n"
-        "").upper()
+        chosen_value = float(input("Digite o valor em EUR a ser convertido: \n\n"))
+        chosen_tax = input("Escolha a taxa de câmbio que será convertida (ex: USD, EUR): \n\n").upper()
 
         # Verifica se a moeda escolhida está entre as opções
         if chosen_tax in currency:
@@ -64,25 +60,20 @@ while True:
             tax_rate = float(rate[index])
             converted_value = round(chosen_value * tax_rate, 2)
 
-            print(f"{chosen_value} EUR equivale a {converted_value} {chosen_tax}", "\n"
-            "")
+            print(f"{chosen_value} EUR equivale a {converted_value} {chosen_tax}", end="\n\n")
         else: 
-            print("Moeda não encontrada. Verifique as taxas de câmbio disponíveis e tente novamente.\n"
-            "")
+            print("Moeda não encontrada. Verifique as taxas de câmbio disponíveis e tente novamente.", end="\n\n")
     elif option == 3:
         # XML formatado:
-        print(soup.prettify(), "\n"
-        "")
+        print(soup.prettify(), end="\n\n")
     elif option == 4:
         # Exporta o DataFrame para CSV
         dataframe.to_csv(f"euro_conversion_{date}.csv", index=False, sep=';')
-        print("Exportado com sucesso.\n"
-        "")
+        print("Exportado com sucesso.", end="\n\n")
     elif option == 5:
         break
     elif option < 0 or option > 5:
-        print("Escolha uma opção válida. \n"
-        "")
+        print("Escolha uma opção válida.", end="\n\n")
 
 
 
