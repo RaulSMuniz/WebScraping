@@ -33,5 +33,11 @@ if brl_rate:
         rate_to_brl.append(round(brl_rate / float(tax), 2))
 
 # Cria o DataFrame
-dataframe = pd.DataFrame({'Data de conversão de Euro: ': date, 'Moedas: ': currency, 'Taxa: ': rate, 'Convertido para BRL:': rate_to_brl})
+dataframe = pd.DataFrame({'Data de conversão de Euro': date, 'Moedas': currency, 'Taxa (Euro)': rate, 'Convertido para BRL': rate_to_brl})
 print(dataframe)
+
+# XML formatado:
+print(soup.prettify())
+
+# Exportar para CSV
+dataframe.to_csv(f"euro_conversion_{date}.csv", index=False, sep=';')
