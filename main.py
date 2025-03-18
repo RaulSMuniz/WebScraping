@@ -19,6 +19,8 @@ rate = [] # Lista de taxas
 rate_to_brl = [] # Lista de taxas convertidas para BRL
 brl_rate = None
 
+source_bank = soup.find("gesmes:name").text
+
 # Armazena os dados nas listas 'currency' e 'rate'
 for moedas in cube:
     if moedas['currency'] == 'BRL':
@@ -33,7 +35,7 @@ if brl_rate:
         rate_to_brl.append(round(brl_rate / float(tax), 2))
 
 # Cria o DataFrame
-dataframe = pd.DataFrame({'Data de conversão de Euro': date, 'Moedas': currency, 'Taxa (Euro)': rate, 'Convertido para BRL': rate_to_brl})
+dataframe = pd.DataFrame({'Banco de Origem': source_bank, 'Data de conversão': date, 'Moedas': currency, 'Taxa (Euro)': rate, 'Convertido para BRL': rate_to_brl})
 
 option = 0
 
@@ -42,7 +44,7 @@ while True:
         option = int(input("Escolha uma opção: \n"
         "1. Ver as taxas de câmbio em Euro \n"
         "2. Escolher um valor em EUR e converter para a moeda escolhida \n"
-        "3. Mostra o arquivo XML original formatado \n"
+        "3. Mostra o XML original formatado \n"
         "4. Exportar as taxas de câmbio para CSV \n"
         "5. Fechar o menu \n"))
     except ValueError:
